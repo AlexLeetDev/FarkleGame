@@ -1,0 +1,90 @@
+# ===================================
+# Visual Studio / C++ Project Ignore
+# ===================================
+
+# Build output folders
+[Bb]in/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+[Oo]bj/
+ipch/
+build/
+out/
+
+# User-specific Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.VC.db
+*.VC.VC.opendb
+*.opendb
+*.vscode/
+.vs/
+
+# Project-specific temp files
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.db
+*.tlog
+*.log
+*.lastbuildstate
+*.unsuccessfulbuild
+*.pdb
+*.idb
+*.ipch
+*.ilk
+
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.app
+*.out
+*.exp
+
+# Auto-generated headers / intermediate files
+*.obj
+*.pch
+*.res
+*.sbr
+*.manifest
+*.tmp
+*.bak
+*.swp
+
+# NuGet and package restore
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+
+# OS files
+Thumbs.db
+ehthumbs.db
+.DS_Store
+desktop.ini
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# Crash logs or profiler output
+*.dmp
+*.gcda
+*.gcno
+*.gcov
+*.log
+*.tlog
+
+# ===================================
+# End of Visual Studio / C++ Ignore
+# ===================================

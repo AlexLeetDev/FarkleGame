@@ -1,0 +1,46 @@
+====================================
+          FARKLE GAME RULES
+====================================
+
+OBJECTIVE
+---------
+Be the first player to reach 10,000 points by rolling combinations of dice.
+
+PLAYERS
+-------
+- Minimum: 2 players
+- No upper limit on number of players
+
+SCORING
+-------
+- Single 1 = 100 points
+- Single 5 = 50 points
+- Three of a kind = face value x 100
+    -> Example: Three 2s = 200, Three 5s = 500
+- Exception: Three 1s = 1,000 points
+
+GAMEPLAY
+--------
+- Roll all 6 dice.
+- Set aside any point dice (1s, 5s, or triples).
+- You may re-roll the remaining dice to earn more points.
+- A "Farkle" occurs when no point dice are rolled.
+    -> You lose all points for that turn.
+- If all 6 dice score, you must re-roll all 6 at least once more before stopping. 
+
+ENTERING THE GAME
+-----------------
+- You must score 1,000 or more points in a single turn to begin recording points.
+- Until you enter the game, your points do not count.
+
+STRATEGY TIP
+------------
+- You do not have to keep every point die.
+- Example: Roll a 1 and 5 - keep the 1 and re-roll the 5 to aim for a triple.
+- At least one point die must be set aside after every roll.
+
+WINNING THE GAME
+----------------
+- The first player to reach 10,000 points triggers the final round.
+- All other players get one last turn to beat that score.
+- The player with the highest score after the final round wins.
