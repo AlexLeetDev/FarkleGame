@@ -2,8 +2,8 @@
  ============================================================================
  File        : Player.h
  Author      : Alex Leet
- Course      : IT-312 - Software Development with C++
- Date        : April 20, 2025
+ Original    : April 20, 2025 (Version 1.0)
+ Updated     : November 2025 (Version 2.0 - Enhanced Hybrid Scoring System)
  Description : Declaration of the Player class used to store
 			   and manage player names, scores, and game entry status.
  ============================================================================
@@ -14,16 +14,20 @@
 
 class Player {
 private:
-	std::string name;		// Player's name
-	int score;				// Current score
-	bool enteredGame;		// True if player has reached 1000+ points in one turn
+    std::string name;   // Player name
+    int score;          // Total score
+    bool entered;       // Tracks whether player has reached 500 points in a turn
 
 public:
-	Player(std::string playerName);		// Constructor that sets player name
+    // Constructor
+    Player(const std::string& playerName);
 
-	std::string getName() const;		// Returns the player's name
-	int getScore() const;				// Returns the player's score
-	void addScore(int points);			// Adds points to the player's total score
-	bool hasEntered() const;			// Checks if player has entered the game
-	void enterGame();					// Marks the player as having entered the game
+    // Getters
+    std::string getName() const;
+    int getScore() const;
+    bool hasEntered() const;
+
+    // Setters / Modifiers
+    void addScore(int amount);
+    void setEntered(bool status);
 };

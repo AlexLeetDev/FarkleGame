@@ -1,46 +1,64 @@
 ====================================
-          FARKLE GAME RULES
+         FARKLE GAME RULES
+            Version 2.0
 ====================================
 
 OBJECTIVE
 ---------
-Be the first player to reach 10,000 points by rolling combinations of dice.
+Be the first player to reach 10,000 points by rolling scoring combinations
+and choosing wisely which dice to keep.
 
 PLAYERS
 -------
 - Minimum: 2 players
 - No upper limit on number of players
 
-SCORING
--------
-- Single 1 = 100 points
-- Single 5 = 50 points
-- Three of a kind = face value x 100
-    -> Example: Three 2s = 200, Three 5s = 500
-- Exception: Three 1s = 1,000 points
+SCORING (STANDARD)
+------------------
+Single Dice:
+- Single 1   = 100 points
+- Single 5   = 50 points
+
+Three of a Kind:
+- Three 1s   = 1,000 points
+- Three Xs   = X * 100 points
+  (Example: Three 2s = 200, Three 5s = 500)
+
+Extended Sets (Hybrid System):
+- 4 of a kind = (base triple score) * 2
+- 5 of a kind = (base triple score) * 3
+- 6 of a kind = (base triple score) * 4
+
+Special Combinations:
+- Straight (1–6)     = 1500 points
+- Three Pairs        = 1500 points
 
 GAMEPLAY
 --------
-- Roll all 6 dice.
-- Set aside any point dice (1s, 5s, or triples).
-- You may re-roll the remaining dice to earn more points.
-- A "Farkle" occurs when no point dice are rolled.
-    -> You lose all points for that turn.
-- If all 6 dice score, you must re-roll all 6 at least once more before stopping. 
+1. Roll all 6 dice.
+2. Set aside any scoring dice you choose to keep.
+   - You may keep ANY scoring dice (flexible selection).
+3. You may re-roll the remaining dice to earn more points.
+4. You must keep at least one scoring die on each roll.
+5. A "Farkle" occurs when no scoring dice appear:
+   - You lose all points earned during that turn.
+6. If all 6 dice score ("hot dice"), you must roll all 6 dice again.
 
 ENTERING THE GAME
 -----------------
-- You must score 1,000 or more points in a single turn to begin recording points.
-- Until you enter the game, your points do not count.
-
-STRATEGY TIP
-------------
-- You do not have to keep every point die.
-- Example: Roll a 1 and 5 - keep the 1 and re-roll the 5 to aim for a triple.
-- At least one point die must be set aside after every roll.
+- You must score 500 or more points in a single turn to start recording
+  points toward your total score.
+- Until you enter the game, turn scores below 500 do not count.
 
 WINNING THE GAME
 ----------------
 - The first player to reach 10,000 points triggers the final round.
-- All other players get one last turn to beat that score.
-- The player with the highest score after the final round wins.
+- All other players get one more chance to beat that score.
+- After the final round, the player with the highest score wins.
+
+STRATEGY TIPS
+-------------
+- Keeping fewer dice gives more chances to roll big combinations.
+- Breaking up triples is allowed but lowers immediate points.
+- Hot dice allow you to re-roll all six dice, often leading to high scores.
+- Stopping early can protect points, but pushing your luck may pay off.

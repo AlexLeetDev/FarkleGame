@@ -2,8 +2,8 @@
  ============================================================================
  File        : Dice.cpp
  Author      : Alex Leet
- Course      : IT-312 - Software Development with C++
- Date        : April 20, 2025
+ Original    : April 20, 2025 (Version 1.0)
+ Updated     : November 2025 (Version 2.0 - Enhanced Hybrid Scoring System)
  Description : Implementation of the Dice class that rolls
                a specified number of six-sided dice.
  ============================================================================
@@ -13,12 +13,28 @@
 #include <cstdlib>
 #include <ctime>
 
-// Rolls numDice six-sided dice and returns the results in a vector
-std::vector<int> Dice::rollDice(int numDice) {
-    std::vector<int> rolls;
-    for (int i = 0; i < numDice; ++i) {
-        // Generate a random number between 1 and 6
-        rolls.push_back(rand() % 6 + 1);
+// ------------------------------------------------------------
+// Roll a single die (1–6)
+// ------------------------------------------------------------
+int Dice::roll() {
+    static bool seeded = false;
+    if (!seeded) {
+        srand(static_cast<unsigned int>(time(nullptr)));
+        seeded = true;
     }
-    return rolls;
+    return (rand() % 6) + 1;
+}
+
+// ------------------------------------------------------------
+// Roll multiple dice and return the results
+// ------------------------------------------------------------
+std::vector<int> Dice::rollMultiple(int count) {
+    std::vector<int> result;
+    result.reserve(count);
+
+    for (int i = 0; i < count; i++) {
+        result.push_back(roll());
+    }
+
+    return result;
 }

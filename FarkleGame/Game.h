@@ -2,8 +2,8 @@
  ============================================================================
  File        : Game.h
  Author      : Alex Leet
- Course      : IT-312 - Software Development with C++
- Date        : April 20, 2025
+ Original    : April 20, 2025 (Version 1.0)
+ Updated     : November 2025 (Version 2.0 - Enhanced Hybrid Scoring System)
  Description : Declaration of the Game class for handling
                Farkle game setup, turn logic, and end conditions.
  ============================================================================
@@ -15,18 +15,30 @@
 
 class Game {
 private:
+    // --- Core Game State ---
     std::vector<Player> players;     // All players in the game
-    Player* leadingPlayer;           // Points to the player with the highest score
+    Player* leadingPlayer;           // Tracks player with the highest score
     bool gameOver;                   // True when the game ends
 
-    void setup();                    // Get number of players and their names
+    // --- Game Flow ---
+    void setup();                    // Get player count and names
     void play();                     // Main game loop
-    void playerTurn(Player& player); // Handles one player's turn
+    void playerTurn(Player& player); // Handles a single player's turn
     void endGame();                  // Shows the winner and ends the game
 
-    // Calculates total score and identifies which dice are scoring
-    int calculateScore(const std::vector<int>& dice, std::vector<int>& scoringDice);
+    // --- Scoring & Validation (Hybrid Scoring System) ---
+    int calculateScore(const std::vector<int>& roll,
+                       std::vector<int>& scoringDice);
+
+    bool isValidSelection(const std::vector<int>& scoringDice,
+                       const std::vector<int>& keptDice);
+
+    int calculateKeptScore(const std::vector<int>& keptDice);
+
+    // --- Special Combination Helpers ---
+    bool isStraight(const int counts[7]);     // Detects 1–6 straight
+    bool isThreePairs(const int counts[7]);   // Detects three pairs
 
 public:
-    void start();                    // Starts the full game process
+    void start();                    // Starts the game
 };
