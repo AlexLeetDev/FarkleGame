@@ -99,7 +99,7 @@ void Game::playerTurn(Player& player) {
         if (score == 0) {
             cout << "Farkle! No scoring dice.\n";
             turnScore = 0;
-            return;
+            return;  // Turn ends immediately, no banking
         }
 
         cout << "Scoring dice: ";
@@ -120,7 +120,7 @@ void Game::playerTurn(Player& player) {
             keptDice.push_back(value);
         }
 
-        // Validate the player's selection
+        // Validate selection
         while (!isValidSelection(scoringDice, keptDice)) {
             cout << "Invalid selection. Choose only from scoring dice.\n";
             cout << "Enter the dice you want to keep: ";
@@ -131,55 +131,58 @@ void Game::playerTurn(Player& player) {
             while (ss2 >> value) keptDice.push_back(value);
         }
 
-        // Add score from kept dice
+        // Add points for kept dice
         int keptScore = calculateKeptScore(keptDice);
         turnScore += keptScore;
 
         cout << player.getName() << "'s current turn score: " << turnScore << "\n";
 
-        // Reduce number of dice for next roll
+        // ------------------------------------------------------------
+        // AUTO-ENTER LOGIC
+        // ------------------------------------------------------------
+        if (!player.hasEntered() && turnScore >= 500) {
+            player.setEntered(true);
+            cout << player.getName() << " has now entered the game!\n";
+        }
+
+        // Set up next roll
         diceToRoll -= static_cast<int>(keptDice.size());
         if (diceToRoll == 0) {
             cout << "Hot dice! You get all six dice again.\n";
             diceToRoll = 6;
         }
 
-        // Ask player whether to continue
+        // Continue?
         cout << "Roll again? (y/n/q): ";
         char choice;
         cin >> choice;
 
-        // Quit game immediately
         if (choice == 'q' || choice == 'Q') {
             cout << "\nPlayer chose to quit the game.\n";
             exit(0);
         }
 
-        // End turn
         if (choice == 'n' || choice == 'N') {
             continueTurn = false;
         }
     }
 
-    // Apply entry rule (500 points)
-    if (!player.hasEntered() && turnScore < 500) {
-        cout << "(Not entered yet. Need 500 points in one turn.)\n";
-        return;
+    // ------------------------------------------------------------
+    // BANK SCORE — only if the player has entered the game
+    // ------------------------------------------------------------
+    if (player.hasEntered()) {
+        player.addScore(turnScore);
+        cout << player.getName() << " banks " << turnScore << " points.\n";
+        cout << player.getName() << "'s total score: " << player.getScore() << "\n";
     }
-
-    // If this is the first time reaching 500+, mark as entered
-    if (turnScore >= 500 && !player.hasEntered()) {
-        player.setEntered(true);
-        cout << player.getName() << " has now entered the game!\n";
+    else {
+        cout << player.getName()
+            << " has not entered yet. Points do not count until scoring 500 in one turn.\n";
     }
-
-    // Add to player's total
-    player.addScore(turnScore);
-    cout << player.getName() << "'s total score: " << player.getScore() << "\n";
 }
 
 // ------------------------------------------------------------
-// Ends the game and shows the winner
+// Ends the game
 // ------------------------------------------------------------
 void Game::endGame() {
     cout << "\n===== GAME OVER =====\n";
@@ -209,29 +212,27 @@ int Game::calculateScore(const vector<int>& roll, vector<int>& scoringDice) {
     int total = 0;
     vector<int> temp;
 
-    // Track which values were used in sets (3+ of a kind)
     bool usedInSet[7] = { false };
 
-    // Scoring for sets (3–6 of a kind) using multiplier method
+    // Sets (3–6 of a kind)
     for (int value = 1; value <= 6; value++) {
         int count = counts[value];
 
         if (count >= 3) {
             int base = (value == 1) ? 1000 : value * 100;
-            int multiplier = count - 2;       // 3-of-kind: x1, 4-of-kind: x2, etc.
+            int multiplier = count - 2;
             int setScore = base * multiplier;
 
             total += setScore;
             usedInSet[value] = true;
 
-            // All dice of this value are part of the set
             for (int i = 0; i < count; i++) {
                 temp.push_back(value);
             }
         }
     }
 
-    // Singles: only score 1s or 5s that were NOT part of a set
+    // Singles
     for (int d : roll) {
         if (!usedInSet[d]) {
             if (d == 1 || d == 5) {
@@ -246,7 +247,7 @@ int Game::calculateScore(const vector<int>& roll, vector<int>& scoringDice) {
 }
 
 // ------------------------------------------------------------
-// Scores only the dice the player chose to keep
+// Scores the kept dice only
 // ------------------------------------------------------------
 int Game::calculateKeptScore(const vector<int>& keptDice) {
     vector<int> dummy;
@@ -254,7 +255,7 @@ int Game::calculateKeptScore(const vector<int>& keptDice) {
 }
 
 // ------------------------------------------------------------
-// Validates the dice the player wants to keep
+// Validates kept dice
 // ------------------------------------------------------------
 bool Game::isValidSelection(const vector<int>& scoringDice,
     const vector<int>& keptDice) {
@@ -268,12 +269,11 @@ bool Game::isValidSelection(const vector<int>& scoringDice,
         if (keptCounts[value] > scoringCounts[value]) return false;
     }
 
-    // Must keep at least one scoring die
     return !keptDice.empty();
 }
 
 // ------------------------------------------------------------
-// Detects straight (1–6)
+// Detect straight (1–6)
 // ------------------------------------------------------------
 bool Game::isStraight(const int counts[7]) {
     for (int value = 1; value <= 6; value++) {
@@ -283,7 +283,7 @@ bool Game::isStraight(const int counts[7]) {
 }
 
 // ------------------------------------------------------------
-// Detects three pairs
+// Detect three pairs
 // ------------------------------------------------------------
 bool Game::isThreePairs(const int counts[7]) {
     int pairs = 0;
